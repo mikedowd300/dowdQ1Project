@@ -110,7 +110,9 @@ function dealerObj() {
   };
   this.doPlayOutHands = function(){
     console.log(this.getSumOfDecisions());
-    if(this.getSumOfDecisions() === 0){
+    if(this.hasBlackJack()) {
+      this.doPayOut();
+    }else if(this.getSumOfDecisions() === 0){
       $(playerRay[playerIndex].optionsDiv).fadeIn(10).css('display', 'flex');
       playerRay[playerIndex].playHand();
     }
