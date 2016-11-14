@@ -1,0 +1,208 @@
+body {
+  background-color: green;
+  padding: 0;
+  margin: 0;
+  font-family: 'Bungee', cursive;
+  color: white;
+  z-index: 100;
+}
+
+/***********modal start page***********/
+
+.modal-start-page-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(222, 222, 222, .8);
+  width: 90%;
+  height: 90vh;
+  margin: 5%;
+  border-radius: 40px;
+  border: 2px solid black;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.modal-start-page-bottom {
+  position: fixed;
+  width: 100%;
+  height: 1300px;
+  padding: 100%;
+  background-color: rgba(0,0,0,.4);
+  z-index: 800;
+}
+
+.add-player, .start-button{
+  font-size: 2rem;
+  margin: 0 auto;
+}
+
+.start-button {
+  display: none;
+}
+
+/*********** DEAL NEW HAND MODAL BUTTON  ***********/
+
+.modal-deal-button {
+  position: fixed;
+  top: 55%;
+  right: 25%;
+  display: none;
+  font-size: 2rem;
+  width: 50%;
+  height: 3rem;
+  box-shadow: 8px 8px 8px red;
+  background-color: grey;
+  /*z-index: 1000;*/
+}
+/*********** Insurance  ***********/
+.modal-insurance {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(444, 444, 444, .8);
+  z-index: 2000;
+  padding-top: 20%;
+  box-sizing: border-box;
+}
+
+.get-insurance, .skip-insurance {
+  width: 60%;
+  height: 3rem;
+  font-size: 1.5rem;
+  display: block;
+  margin: 1rem auto;
+  font-family: 'Bungee', cursive;
+  color: black;
+}
+
+.get-insurance:hover, .skip-insurance:hover {
+  color: red;
+}
+
+.insurance-bet {
+  text-align: center;
+  display: none;
+}
+
+/*********** Play Hand After Deal ***********/
+
+.modal-play-options {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 20%;
+  margin-top: 8.2rem;
+  justify-content: space-around;;
+  background-color: transparent;;
+  z-index: 2000;
+  box-sizing: border-box;
+}
+
+.modal-play-options button {
+  height: 1.5rem;
+}
+.hit-button, .stay-button, .double-button, .split-button{
+  display: none;
+  font-family: 'Bungee', cursive;
+}
+
+.hit-button:hover, .stay-button:hover, .double-button:hover, .split-button:hover{
+  width: 2rem;
+  height: 1 rem;
+  color: red;
+}
+
+/*********** MAIN PAGE  ***********/
+
+.player-container, .dealer-container {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.card-container {
+  display: flex;
+}
+
+.plyr-crd-img {
+  width: 25%;
+  height: 25%;
+}
+
+.money-container {
+  /*display: flex;*/
+  width: 100%;
+  height: 200px;
+  position: relative;
+  font-size: 2rem;
+}
+
+.player {
+  width: 40%;
+  height: 100%;
+  margin: 0 6px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 4px;
+  background-color: #74f442;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.card {
+  margin-top: 6%;
+  margin-bottom: 3%;
+  max-width: 120px;
+  box-sizing: border-box;
+}
+
+.avatar, .av-img {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+button {
+  border-radius: 15px;
+  font-family: 'Bungee', cursive;
+}
+
+/*********** BETTING ***********/
+
+.chips, .bet {
+  display: inline-block;
+  width: 50%;
+  margin-bottom: 5rem;
+}
+
+.bet {
+  text-align: right;
+}
+
+.increase-bet, .decrease-bet {
+  height: 3rem;
+  width: 3rem;
+  font-size: 2.5rem;
+  border-radius: 50%;
+  z-index: 5000;
+}
+
+.increase-bet:hover, .decrease-bet:hover {
+  color: red;
+}
+
+.decrease-bet {
+  margin-right: calc(100% - 6rem);
+}
+
+/***********   ***********/
