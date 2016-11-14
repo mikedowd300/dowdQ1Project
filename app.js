@@ -4,13 +4,14 @@ var avatarRay = [];
 var playerRay = [];
 var playerIndex = 0;
 var dealer;
+var cutCount = 60;
+var deckID;
 $.get('avatarURLs.json', function(avDB) {
   avatarRay = avDB;
 });
 var url = 'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6';
 $.get(url, function(data) {
-  var deckID = data.deck_id;
-  var cutCount = 60;
+  deckID = data.deck_id;
   var dealCardURL = 'https://deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=' + 312;
   $.get(dealCardURL, function(datum) {
     deckRay = datum.cards;
@@ -125,5 +126,11 @@ function checkIndexPlayHand() {
   } else {
     playerIndex = 0;
     dealerFinishesHand();
+  }
+}
+
+function doShuffle() {
+  if(deckRay.length < cutCount) {
+    console.log('SHUFFLE TIME!!!');
   }
 }

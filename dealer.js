@@ -148,5 +148,6 @@ function dealerObj() {
     $('.card-container').fadeOut(4000);
     $('.increase-bet, .decrease-bet').fadeIn(1700);
     $('.increase-bet, .decrease-bet').click(console.log('hi'));
+    doShuffle();
   }
 }
