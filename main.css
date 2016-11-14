@@ -45,7 +45,7 @@ body {
 
 .modal-deal-button {
   position: fixed;
-  top: 55%;
+  top: 40%;
   right: 25%;
   display: none;
   font-size: 2rem;
@@ -53,7 +53,7 @@ body {
   height: 3rem;
   box-shadow: 8px 8px 8px red;
   background-color: grey;
-  /*z-index: 1000;*/
+  z-index: 1000;
 }
 /*********** Insurance  ***********/
 .modal-insurance {
@@ -80,12 +80,17 @@ body {
 }
 
 .get-insurance:hover, .skip-insurance:hover {
-  color: red;
+  width: 66%;
+  height: 3.3rem;
 }
 
 .insurance-bet {
   text-align: center;
   display: none;
+}
+
+h1 {
+  color: black;
 }
 
 /*********** Play Hand After Deal ***********/
@@ -113,9 +118,8 @@ body {
 }
 
 .hit-button:hover, .stay-button:hover, .double-button:hover, .split-button:hover{
-  width: 2rem;
-  height: 1 rem;
-  color: red;
+  height: 1.9rem;
+  color: rgb(88,88,88);
 }
 
 /*********** MAIN PAGE  ***********/
@@ -198,11 +202,21 @@ button {
 }
 
 .increase-bet:hover, .decrease-bet:hover {
-  color: red;
+  height: 3.3rem;
+  width: 3.3rem;
+  color: rgb(88,88,88);
 }
 
 .decrease-bet {
   margin-right: calc(100% - 6rem);
+}
+
+.decrease-bet:hover {
+  margin-right: calc(100% - 6.3rem);
+}
+
+.increase-bet:hover {
+  margin-left: -.6rem;
 }
 
 /***********   ***********/

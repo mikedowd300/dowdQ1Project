@@ -89,7 +89,7 @@ $('.modal-deal-button').click(function() {
   $('.card-container').html('').fadeIn(1000);
   $('.dealer-container').html('');
   $('.modal-deal-button').hide(700);
-  $('.increase-bet, .decrease-bet').fadeIn(400);
+  $('.increase-bet, .decrease-bet').hide(400);
   dealer = new dealerObj();
   dealer.oponents = playerRay.length;
   for(var i = 0; i < playerRay.length; i++) {
@@ -98,21 +98,21 @@ $('.modal-deal-button').click(function() {
     playerRay[i].hands.push(newHandObj);
     playerRay[i].div.append('<div class="card-container"></div>');
     for(var j = 0; j < 2; j++){
-      var tempCard = deckRay.pop();
-      playerRay[i].hands[0].cards.push(tempCard);
-      var newElem = $('<img class="plyr-crd-img" src="' + tempCard.image + '">');
-      playerRay[i].div.children('.card-container')[0].append(newElem[0]);
+      var nextCard = deckRay.pop();
+      playerRay[i].hands[0].cards.push(nextCard);
+      var newImg = $('<img class="plyr-crd-img" src="' + nextCard.image + '">');
+      playerRay[i].div.children('.card-container')[0].append(newImg[0]);
     }
   }
   dealer.cards.push(deckRay.pop());
   dealer.holeCard = dealer.cards[0];
   dealer.cards.push(deckRay.pop());
-  dealer.checkForAce(dealer.cards[1]);
+  dealer.checkForAce();
   $('.dealer-container').append('<div class="holecard card"><img src="' + dealer.cards[0].image + '"></div>');
   $('.dealer-container').append('<div class="card"><img src="' + dealer.cards[1].image + '"></div>');
   dealer.getValuHi();
   dealer.getValuLo();
-  doInsurance();
+  dealer.doInsurance();
 });
 
 function checkIndexPlayHand() {
@@ -122,15 +122,23 @@ function checkIndexPlayHand() {
   $(playerRay[playerIndex].splitButton).fadeOut(400);
   if(playerIndex + 1 < playerRay.length) {
     playerIndex++;
-    doPlayOutHands(playerIndex);
+    dealer.doPlayOutHands(playerIndex);
   } else {
     playerIndex = 0;
-    dealerFinishesHand();
+    dealer.finishesHand();
   }
 }
 
 function doShuffle() {
   if(deckRay.length < cutCount) {
     console.log('SHUFFLE TIME!!!');
+    $.get('https://deckofcardsapi.com/api/deck/' + deckID + '/shuffle/', function(data) {
+      console.log(data);
+      deckID = data.deck_id;
+      var dealCardURL = 'https://deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=' + 312;
+      $.get(dealCardURL, function(datum) {
+        deckRay = datum.cards;
+      });
+    });
   }
 }

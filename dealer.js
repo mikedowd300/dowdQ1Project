@@ -12,19 +12,19 @@ function dealerObj() {
   this.handOver = false;
   this.oponents = 0;
   this.checkForAce = function() {
-    if (cards[1].value === 'ACE'){
-      return = true;
+    if (this.cards[1].value === 'ACE'){
+      return true;
     }
     return false;
   };
   this.getValuHi = function() {
     var sum = 0;
+    var aceFound = false;
     for(var i = 0; i < this.cards.length; i++){
-      var aceFound = false;
       if(this.cards[i].value === 'ACE' && aceFound){
-        sum += 11;
-      }else if(this.cards[i].value === 'ACE'){
         sum += 1;
+      }else if(this.cards[i].value === 'ACE'){
+        sum += 11;
       }else if(this.cards[i].value === 'JACK' || this.cards[i].value === 'QUEEN'|| this.cards[i].value === 'KING'){
         sum += 10;
       }else {
@@ -38,6 +38,14 @@ function dealerObj() {
       return true;
     }
     return false;
+  };
+  this.getSumOfDecisions = function() {
+    console.log('getSumOfDecisions');
+    var sum = 0;
+    for(var i = 0; i < playerRay.length ; i++){
+      sum += playerRay[i].needsToDecideOnInsurance;
+    }
+    return sum;
   };
   this.getValuLo = function() {
     var sum = 0;
@@ -62,8 +70,8 @@ function dealerObj() {
     var newCard = deckRay.pop();
     $('.dealer-container').append('<div class="card"><img src="' + newCard.image + '"></div>');
     this.cards.push(newCard);
-    this.getValuLo();
-    this.getValuHi();
+    this.getValuLo();// dont hink i need these anymore
+    this.getValuHi();// dont hink i need these anymore
   };
   this.payInsurance = function() {
     for(var i = 0; i < playerRay.length; i++) {
@@ -78,14 +86,15 @@ function dealerObj() {
     }
     return false;
   };
-  this.doInsurance(){
-    if(this.hasAceShowing()) {
+  this.doInsurance = function(){
+    if(this.checkForAce()) {
       $('.modal-insurance').fadeIn(800);
       $('.get-insurance, .skip-insurance').fadeIn(500);
       for(var i = 0; i < playerRay.length; i++) {
         playerRay[i].needsToDecideOnInsurance = 1;
       }
       $('.get-insurance, .skip-insurance').click(function() {
+        console.log(this.getSumOfDecisions());
         if(this.getSumOfDecisions() === 0){
           if(this.hasBlackJack()) {
             console.log('DEALER HAS IT');
@@ -99,19 +108,25 @@ function dealerObj() {
     }
     this.doPlayOutHands(0);
   };
-  this.getSumOfDecisions = function() {
-    var sum = 0;
-    for(var i = 0; i < playerRay.length ; i++){
-      sum += playerRay[i].needsToDecideOnInsurance;
-    }
-    return sum;
-  };
   this.doPlayOutHands = function(){
-    if(getSumOfDecisions() === 0){
+    console.log(this.getSumOfDecisions());
+    if(this.getSumOfDecisions() === 0){
       $(playerRay[playerIndex].optionsDiv).fadeIn(10).css('display', 'flex');
       playerRay[playerIndex].playHand();
     }
   };
+  this.finishesHand = function() {
+  console.log(this.getValuHi(), this.getValuLo());
+  if(this.oponents > 0 && !this.hasBlackJack()){
+    while(this.getValuHi() < 17) {
+      this.hit();
+    };
+    while(this.getValuHi() > 21 && this.getValuLo() < 17){
+      this.hit();
+    }
+  }
+  this.doPayOut();
+};
   this.doPayOut = function() {
     for(var i = 0; i < playerRay.length; i++) {
       console.log(playerRay[i].hands.length);
@@ -145,6 +160,7 @@ function dealerObj() {
       playerRay[i].resetValues();
     }
     $('.modal-deal-button').fadeIn(1700);
+    $('.modal-play-options').hide(100);
     $('.card-container').fadeOut(4000);
     $('.increase-bet, .decrease-bet').fadeIn(1700);
     $('.increase-bet, .decrease-bet').click(console.log('hi'));

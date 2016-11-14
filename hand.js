@@ -13,11 +13,11 @@ function handObj() {
     //valuLo: 0,
     //hasBlackJack: false,
     //valuHi: 0,
-    run: function() {
-      this.getValuHi();
-      this.getValuLo();
-      this.doHasBlackJack();
-    },
+    // run: function() {
+    //   this.getValuHi();
+    //   this.getValuLo();
+    //   this.doHasBlackJack();
+    // },
     getValuHi: function() {
       var sum = 0;
       for(var i = 0; i < this.cards.length; i++){
@@ -57,7 +57,7 @@ function handObj() {
       return false;
     },
     isDoubleAble: function() {
-      if(this.cards.length === 2 && !hasBlackJack()){
+      if(this.cards.length === 2 && !this.hasBlackJack()){
         return true;
       }
       return false;

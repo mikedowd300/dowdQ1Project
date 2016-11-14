@@ -69,36 +69,29 @@ function playerObj(avatar, div) {
   };
   this.playHand = function() {
     for(var i = 0; i < this.hands.length; i++) {
-      var myHand = this.hands[i];
       var loopCount = 0;
       //while(!myHand.stay && loopCount < 20 ) {
-        if(myHand.doHasBlackJack()) {
-          myHand.stay = true;
-          myHand.alive = false;
-          if(!dealer.hasBlackJack){
-            this.chips += (myHand.betSize * 1.5);
+        if(this.hands[i].hasBlackJack()) {
+          this.hands[i].stay = true;
+          this.hands[i].alive = false;
+          if(!dealer.hasBlackJack()){
+            this.chips += (this.hands[i].betSize * 1.5);
             $(this.chipsDiv).text('$' + this.chips);
           }
           checkIndexPlayHand();
         }
-        if(myHand.isDoubleAble() && !myHand.stay) {
+        if(this.hands[i].isDoubleAble() && !this.hands[i].stay) {
            $(this.doubleButton).fadeIn(600);
         }
-        if(!myHand.stay) {
+        if(!this.hands[i].stay) {
           $(this.stayButton).fadeIn(600);
         }
-        if(myHand.isSplitAble()){
+        if(this.hands[i].isSplitAble()){
           $(this.splitButton).fadeIn(200);
         }
-        if(!myHand.stay && myHand.getValuHi() < 21 && myHand.getValuLo() < 21){
+        if(!this.hands[i].stay && this.hands[i].getValuHi() < 21 && this.hands[i].getValuLo() < 21){
           $(this.hitButton).fadeIn(200);
         }
-      //}
-      // $(this.doubleButton).hide(300);
-      // $(this.hitButton).hide(300);
-      // $(this.splitButton).hide(300);
-      // $(this.stayButton).hide(300);
-      // $(this.optionsDiv).hide(300);
       //loopCount++;
     }
   };
@@ -111,19 +104,20 @@ function playerObj(avatar, div) {
   // this.hit = function() {
   //
   // };
-  // this.resetValues = function() {
-  //   if(dealer.handOver) {//insurance
-  //     this.hands = [];
-  //     this.deal = false;
-  //     this.insuranceBet = 0;
-  //     this.needsToDecideOnInsurance = 0; //Not set to false because they are added up
-  //     this.showInsuranceBetH1 = '';
-  //     this.doubleAble = true;
-  //     this.splitAble = false;
-  //     if(this.chips < 0) {
-  //       this.betSize += this.chips;
-  //       this.chips = 0;
-  //     }
-  //   }
-  // }
+  this.resetValues = function() {
+    if(dealer.handOver) {//insurance
+      this.hands = [];
+      this.deal = false;
+      this.insuranceBet = 0;
+      this.needsToDecideOnInsurance = 0; //Not set to false because they are added up
+      this.showInsuranceBetH1 = '';
+      //this.doubleAble = true;
+      //this.splitAble = false;
+      if(this.chips < 0) {
+        this.betSize += this.chips;
+        this.chips = 0;
+        $(this.chipsDiv).text('$' + this.chips);
+      }
+    }
+  }
 }
