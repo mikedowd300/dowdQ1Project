@@ -40,6 +40,7 @@ function dealerObj() {
     return false;
   };
   this.getSumOfDecisions = function() {
+    //console.log('getSumOfDecisions');
     var sum = 0;
     for(var i = 0; i < playerRay.length ; i++){
       sum += playerRay[i].needsToDecideOnInsurance;
@@ -116,7 +117,6 @@ function dealerObj() {
     }
   };
   this.finishesHand = function() {
-  console.log(this.getValuHi(), this.getValuLo());
   if(this.oponents > 0 && !this.hasBlackJack()){
     while(this.getValuHi() < 17) {
       this.hit();
@@ -129,7 +129,6 @@ function dealerObj() {
 };
   this.doPayOut = function() {
     for(var i = 0; i < playerRay.length; i++) {
-      console.log(playerRay[i].hands.length);
       for(var j = 0; j < playerRay[i].hands.length; j++){
         if(dealer.isBust() && playerRay[i].hands[j].alive) {
           if(!playerRay[i].hands[j].isBusted()) {
@@ -159,7 +158,7 @@ function dealerObj() {
     }
     $('.modal-deal-button').fadeIn(1700);
     $('.modal-play-options').hide(100);
-    $('.card-container').fadeOut(4000);
+    //$('.card-container').fadeOut(4000);
     $('.increase-bet, .decrease-bet').fadeIn(1700);
     doShuffle();
   }

@@ -6,6 +6,7 @@ function playerObj(avatar, div) {
   this.insuranceBet = 0;
   this.needsToDecideOnInsurance = 0; //Not set to false because they are added up
   this.div = div;
+  this.activeHand = 0;
   // this.chipsDiv = '';
   // this.betDiv = '';
   // this.showInsuranceBetH1 = '';
@@ -68,8 +69,7 @@ function playerObj(avatar, div) {
   };
   this.playHand = function() {
     for(var i = 0; i < this.hands.length; i++) {
-      //var loopCount = 0;
-      //while(!myHand.stay && loopCount < 20 ) {
+      this.activeHand = i;
       if(this.hands[i].hasBlackJack()) {
         this.hands[i].stay = true;
         this.hands[i].alive = false;
@@ -77,7 +77,14 @@ function playerObj(avatar, div) {
           this.chips += (this.hands[i].betSize * 1.5);
           $(this.chipsDiv).text('$' + this.chips);
         }
-        checkIndexPlayHand();
+        checkIndexPlayHand(1);
+      }
+      if(this.hands[i].cards.length === 1) {
+        var card = deckRay.pop();
+        this.hands[i].cards.push(card);
+        var newImg = $('<img class="plyr-crd-img" src="' + card.image + '">');
+        playerRay[i].div.children('.card-container')[0].append(newImg[0]);
+        console.log('this was the split hand');
       }
       if(this.hands[i].isDoubleAble() && !this.hands[i].stay) {
          $(this.doubleButton).fadeIn(600);
@@ -91,7 +98,6 @@ function playerObj(avatar, div) {
       if(!this.hands[i].stay && this.hands[i].getValuHi() < 21 && this.hands[i].getValuLo() < 21){
         $(this.hitButton).fadeIn(200);
       }
-      //loopCount++;
     }
   };
   this.resetValues = function() {
