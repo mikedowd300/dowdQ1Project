@@ -219,4 +219,13 @@ button {
   margin-left: -.6rem;
 }
 
-/***********   ***********/
+/*********** insult ***********/
+
+.insult {
+  width: 100%;
+  padding: 20px;
+  color: red;
+  display: none;
+  background-color: rgba(255, 255, 255, .4);
+  box-sizing: border-box;
+}

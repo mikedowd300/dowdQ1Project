@@ -6,8 +6,13 @@ var playerIndex = 0;
 var dealer;
 var cutCount = 60;
 var deckID;
+var insultRay = [];
 $.get('avatarURLs.json', function(avDB) {
   avatarRay = avDB;
+});
+var url = 'https://galvanize-cors-proxy.herokuapp.com/quandyfactory.com/insult/json';
+$.get(url, function(dat) {
+  insultRay.push(dat.insult);
 });
 var url = 'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6';
 $.get(url, function(data) {
@@ -67,6 +72,7 @@ $.get(url, function(data) {
           var newImg = $('<img class="plyr-crd-img" src="' + nextCard.image + '">');
           player.div.children('.card-container')[0].append(newImg[0]);
           if(player.hands[player.activeHand].isBusted()) {
+            player.insult();
             dealer.oponents -= 1;
             player.hands[player.activeHand].alive = false;
             player.chips -= player.hands[player.activeHand].betSize;
