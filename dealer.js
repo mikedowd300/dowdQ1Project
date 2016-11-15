@@ -33,12 +33,6 @@ function dealerObj() {
     }
     return sum;
   };
-  this.hasBlackJack = function() {
-    if(this.cards.length === 2 && this.getValuHi() === 21){
-      return true;
-    }
-    return false;
-  };
   this.getSumOfDecisions = function() {
     //console.log('getSumOfDecisions');
     var sum = 0;
@@ -86,30 +80,56 @@ function dealerObj() {
     }
     return false;
   };
+//   function doInsurance(){
+//   if(dealer.hasAceShowing) {
+//     $('.modal-insurance').fadeIn(800);
+//     $('.get-insurance, .skip-insurance').fadeIn(500);
+//     for(var i = 0; i < playerRay.length; i++) {
+//       playerRay[i].needsToDecideOnInsurance = 1;
+//     }
+//     $('.get-insurance, .skip-insurance').click(function() {
+//       if(getSumOfDecisions() === 0){
+//         if(dealer.valuHi === 21) {
+//           console.log('DEALER HAS IT');
+//           dealer.handOver = true;
+//           dealer.hasBlackJack = true;
+//           dealer.payInsurance();
+//         }
+//         $('.modal-insurance').hide(1500);
+//         doPlayOutHands(0);
+//       }
+//     });
+//   }
+//   doPlayOutHands(0);
+// }
+
   this.doInsurance = function(){
-    if(this.checkForAce()) {
+    if(!this.checkForAce()) {
       $('.modal-insurance').fadeIn(800);
       $('.get-insurance, .skip-insurance').fadeIn(500);
       for(var i = 0; i < playerRay.length; i++) {
         playerRay[i].needsToDecideOnInsurance = 1;
       }
       $('.get-insurance, .skip-insurance').click(function() {
-        console.log(this.getSumOfDecisions());
-        if(this.getSumOfDecisions() === 0){
-          if(this.hasBlackJack()) {
+        console.log(dealer.getSumOfDecisions());
+        if(dealer.getSumOfDecisions() === 0){
+
+          if(dealerHasBlackJack()) {
             console.log('DEALER HAS IT');
-            this.handOver = true;
-            this.payInsurance();
+            dealer.handOver = true;
+            dealer.payInsurance();
           }
           $('.modal-insurance').hide(1500);
-          this.doPlayOutHands(0);
+            dealer.doPlayOutHands(0);
         }
       });
     }
+    console.log('about to do payout');
     this.doPlayOutHands(0);
   };
   this.doPlayOutHands = function(){
-    if(this.hasBlackJack()) {
+    console.log('doin payout', this.getSumOfDecisions());
+    if(dealerHasBlackJack()) {
       this.doPayOut();
     }else if(this.getSumOfDecisions() === 0){
       $(playerRay[playerIndex].optionsDiv).fadeIn(10).css('display', 'flex');
@@ -117,7 +137,7 @@ function dealerObj() {
     }
   };
   this.finishesHand = function() {
-  if(this.oponents > 0 && !this.hasBlackJack()){
+  if(this.oponents > 0 && !dealerHasBlackJack()){
     while(this.getValuHi() < 17) {
       this.hit();
     };

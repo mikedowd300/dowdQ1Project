@@ -201,3 +201,19 @@ function doShuffle() {
     });
   }
 }
+
+function getSumOfDecisions() {
+  var sum = 0;
+  for(var i = 0; i < playerRay.length ; i++){
+    sum += playerRay[i].needsToDecideOnInsurance;
+  }
+  return sum;
+}
+
+
+function dealerHasBlackJack() {
+  if(dealer.cards.length === 2 && dealer.getValuHi() === 21){
+    return true;
+  }
+  return false;
+};
