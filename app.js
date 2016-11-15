@@ -61,16 +61,68 @@ $.get(url, function(data) {
           $(player.betDiv).text('$' + player.betSize);
         });
         $(player.hitButton).click(function() {
-          checkIndexPlayHand();
+          console.log(player.activeHand);
+          var nextCard = deckRay.pop();
+          player.hands[0].cards.push(nextCard);
+          var newImg = $('<img class="plyr-crd-img" src="' + nextCard.image + '">');
+          player.div.children('.card-container')[0].append(newImg[0]);
+          if(player.hands[player.activeHand].isBusted()) {
+            dealer.oponents -= 1;
+            player.hands[player.activeHand].alive = false;
+            player.chips -= player.hands[player.activeHand].betSize;
+            if(player.chips < player.betSize) {
+              player.betSize = player.chips;
+              player.chips = 0;
+            }
+            $(player.chipsDiv).text('$' + player.chips);
+            $(player.betDiv).text('$' + player.betSize);
+            checkIndexPlayHand(1);
+          } else {
+            checkIndexPlayHand(0);
+          }
         });
         $(player.stayButton).click(function() {
-          checkIndexPlayHand();
+          checkIndexPlayHand(1);
         });
         $(player.doubleButton).click(function() {
-          checkIndexPlayHand();
+          //console.log(player);
+          var nextCard = deckRay.pop();
+          player.hands[0].cards.push(nextCard);
+          player.hands[0].alive = false;
+          var doubleBet = player.betSize;
+          if(player.betSize > player.chips){
+            doubleBet = player.chips;
+            player.chips = 0;
+          }
+          player.chips -= doubleBet;
+          doubleBet = doubleBet + player.betSize;
+          $(player.chipsDiv).text('$' + player.chips);
+          $(player.betDiv).text('$' + doubleBet);
+          var newImg = $('<img class="plyr-crd-img" src="' + nextCard.image + '">');
+          player.div.children('.card-container')[0].append(newImg[0]);
+          //deal with player busting on the double
+          checkIndexPlayHand(1);
         });
         $(player.splitButton).click(function() {
-          checkIndexPlayHand();
+          var i = player.activeHand;
+          var hand = new handObj();
+          dealer.oponents += 1;
+          var card = player.hands[i].cards.pop()
+          hand.cards.push(card);
+          player.hands.push(hand);
+          hand.betSize = player.betSize;
+          if(player.chips < player.betSize) {
+            hand.betSize = player.chips;
+            player.chips = 0;
+          }
+          var card2 = deckRay.pop();
+          var newImg = $('<img class="plyr-crd-img" src="' + card2.image + '">');
+          player.div.children('.card-container')[i].append(newImg[0]);
+          var removeImage = $(newImg[0]).prev();
+          $(removeImage[0]).remove();
+          player.hands[i].cards.push(card2);
+          $(player.div).append('<div class="card-container"><img class="plyr-crd-img" src="' + card.image +'"></div>');
+          checkIndexPlayHand(0);
         });
         playerRay.push(player);
       }
@@ -81,12 +133,11 @@ $.get(url, function(data) {
 $('.start-button').click(function() {
   $('.modal-start-page-bottom').hide(500);
   $('.modal-start-page-top').hide(500);
-  //$('.add-player').hide(300);
   $('.modal-deal-button').fadeIn(700);
 });
 
 $('.modal-deal-button').click(function() {
-  $('.card-container').html('').fadeIn(1000);
+  $('.card-container').remove();
   $('.dealer-container').html('');
   $('.modal-deal-button').hide(700);
   $('.increase-bet, .decrease-bet').hide(400);
@@ -115,13 +166,14 @@ $('.modal-deal-button').click(function() {
   dealer.doInsurance();
 });
 
-function checkIndexPlayHand() {
+function checkIndexPlayHand(increment) {
   $(playerRay[playerIndex].hitButton).fadeOut(400);
   $(playerRay[playerIndex].stayButton).fadeOut(400);
   $(playerRay[playerIndex].doubleButton).fadeOut(400);
   $(playerRay[playerIndex].splitButton).fadeOut(400);
-  if(playerIndex + 1 < playerRay.length) {
-    playerIndex++;
+
+  if(playerIndex + increment < playerRay.length) {
+    playerIndex += increment;
     dealer.doPlayOutHands(playerIndex);
   } else {
     playerIndex = 0;
