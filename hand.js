@@ -5,6 +5,7 @@ function handObj() {
     stay: false, //maybe get rid of this
     alive: true,
     betSize: 0,
+    doubledBet: 0;//sometimes player doubles for less
     //hasAce: false,
     //busts: false,
     //displayButtons: false,

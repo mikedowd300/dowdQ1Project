@@ -34,7 +34,6 @@ function dealerObj() {
     return sum;
   };
   this.getSumOfDecisions = function() {
-    //console.log('getSumOfDecisions');
     var sum = 0;
     for(var i = 0; i < playerRay.length ; i++){
       sum += playerRay[i].needsToDecideOnInsurance;
@@ -80,31 +79,8 @@ function dealerObj() {
     }
     return false;
   };
-//   function doInsurance(){
-//   if(dealer.hasAceShowing) {
-//     $('.modal-insurance').fadeIn(800);
-//     $('.get-insurance, .skip-insurance').fadeIn(500);
-//     for(var i = 0; i < playerRay.length; i++) {
-//       playerRay[i].needsToDecideOnInsurance = 1;
-//     }
-//     $('.get-insurance, .skip-insurance').click(function() {
-//       if(getSumOfDecisions() === 0){
-//         if(dealer.valuHi === 21) {
-//           console.log('DEALER HAS IT');
-//           dealer.handOver = true;
-//           dealer.hasBlackJack = true;
-//           dealer.payInsurance();
-//         }
-//         $('.modal-insurance').hide(1500);
-//         doPlayOutHands(0);
-//       }
-//     });
-//   }
-//   doPlayOutHands(0);
-// }
-
   this.doInsurance = function(){
-    if(!this.checkForAce()) {
+    if(this.checkForAce()) {
       $('.modal-insurance').fadeIn(800);
       $('.get-insurance, .skip-insurance').fadeIn(500);
       for(var i = 0; i < playerRay.length; i++) {
@@ -158,6 +134,9 @@ function dealerObj() {
           }
         }
         if(playerRay[i].hands[j].alive){
+          if(playerRay[i].hands[j].betSize < ) {
+            
+          }
           if(this.getValue() > playerRay[i].hands[j].getValue()){
             playerRay[i].chips -= playerRay[i].hands[j].betSize;
             $(playerRay[i].chipsDiv).text('$' + playerRay[i].chips);
@@ -178,8 +157,8 @@ function dealerObj() {
     }
     $('.modal-deal-button').fadeIn(1700);
     $('.modal-play-options').hide(100);
-    //$('.card-container').fadeOut(4000);
     $('.increase-bet, .decrease-bet').fadeIn(1700);
     doShuffle();
+    doReWriteBetSize();
   }
 }

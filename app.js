@@ -91,22 +91,38 @@ $.get(url, function(data) {
           checkIndexPlayHand(1);
         });
         $(player.doubleButton).click(function() {
-          //console.log(player);
           var nextCard = deckRay.pop();
-          player.hands[0].cards.push(nextCard);
-          player.hands[0].alive = false;
-          var doubleBet = player.betSize;
+          var i = player.activeHand;
+          player.hands[i].cards.push(nextCard);
+          player.hands[i].alive = false;
+          var doubledBet = player.betSize;
+          console.log('chips beforre: ', player.chips);
           if(player.betSize > player.chips){
-            doubleBet = player.chips;
+            doubledBet = player.chips;
             player.chips = 0;
+          } else {
+            player.chips -= doubledBet;
           }
-          player.chips -= doubleBet;
-          doubleBet = doubleBet + player.betSize;
+          player.hands[i].doubledBet = doubledBet;
+          console.log('chips after: ', player.chips);
+          doubledBet = doubledBet + player.betSize;
           $(player.chipsDiv).text('$' + player.chips);
-          $(player.betDiv).text('$' + doubleBet);
+          $(player.betDiv).text('$' + doubledBet);
           var newImg = $('<img class="plyr-crd-img" src="' + nextCard.image + '">');
           player.div.children('.card-container')[0].append(newImg[0]);
           //deal with player busting on the double
+          if(player.hands[i].isBusted()) {
+            player.insult();
+            dealer.oponents -= 1;
+            player.hands[i].alive = false;
+            player.chips -= player.hands[i].betSize;//fiddle with this
+            if(player.chips < player.betSize) {
+              player.betSize = player.chips;
+              player.chips = 0;
+            }
+            $(player.chipsDiv).text('$' + player.chips);
+            $(player.betDiv).text('$' + player.betSize);
+          }
           checkIndexPlayHand(1);
         });
         $(player.splitButton).click(function() {
@@ -217,3 +233,9 @@ function dealerHasBlackJack() {
   }
   return false;
 };
+
+function doReWriteBetSize() {
+  for(var i = 0; i < playerRay.length; i++) {
+    $(playerRay[i].betDiv).text('$' + playerRay[i].betSize);
+  }
+}

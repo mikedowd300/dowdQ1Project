@@ -101,7 +101,7 @@ function playerObj(avatar, div) {
     }
   };
   this.resetValues = function() {
-    if(dealer.handOver) {//insurance
+    if(dealer.handOver) {
       this.hands = [];
       this.deal = false;
       this.insuranceBet = 0;
@@ -116,8 +116,6 @@ function playerObj(avatar, div) {
       }
     }
   };
-
-  //https://galvanize-cors-proxy.herokuapp.com/
   this.insult = function() {
     var insult;
     $($(this.div.children('.insult'))[0]).remove()
