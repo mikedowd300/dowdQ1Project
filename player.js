@@ -73,13 +73,14 @@ function playerObj(avatar, div) {
       if(this.hands[i].hasBlackJack()) {
         this.hands[i].stay = true;
         this.hands[i].alive = false;
-        if(!dealer.hasBlackJack()){
+        if(!dealerHasBlackJack()){
           this.chips += (this.hands[i].betSize * 1.5);
           $(this.chipsDiv).text('$' + this.chips);
         }
         checkIndexPlayHand(1);
       }
       if(this.hands[i].cards.length === 1) {
+        //THIS IS FOR AFTER A SPLIT
         var card = deckRay.pop();
         this.hands[i].cards.push(card);
         var newImg = $('<img class="plyr-crd-img" src="' + card.image + '">');
@@ -107,8 +108,6 @@ function playerObj(avatar, div) {
       this.insuranceBet = 0;
       this.needsToDecideOnInsurance = 0; //Not set to false because they are added up
       this.showInsuranceBetH1 = '';
-      //this.doubleAble = true;
-      //this.splitAble = false;
       if(this.chips < 0) {
         this.betSize += this.chips;
         this.chips = 0;
@@ -117,14 +116,15 @@ function playerObj(avatar, div) {
     }
   };
   this.insult = function() {
-    var insult;
+    $('.insult').remove();
+    //$( ".hello" ).remove();
     $($(this.div.children('.insult'))[0]).remove()
     var url = 'https://galvanize-cors-proxy.herokuapp.com/quandyfactory.com/insult/json';
     $.get(url, function(dat) {
       insultRay.push(dat.insult);
     });
-    $(this.div).append('<div class="insult"><h2> Bitch, ' + insultRay.pop() + '</h2></div>');
-    console.log($(this.div.children('.insult'))[0]);
-    $($(this.div.children('.insult'))[0]).fadeIn(120).delay(3000).fadeOut(1500);
+    $(this.div).append('<div class="insult"><h2> Bitch, ' + insultRay.pop() + '</h2></div>')
+    $('.insult').fadeIn(100).delay(7000).fadeOut(5000);
+    $('.insult').css('transform', 'translate3d(0, -1600px, 0)');
   };
 }

@@ -100,11 +100,9 @@ function dealerObj() {
         }
       });
     }
-    console.log('about to do payout');
     this.doPlayOutHands(0);
   };
   this.doPlayOutHands = function(){
-    console.log('doin payout', this.getSumOfDecisions());
     if(dealerHasBlackJack()) {
       this.doPayOut();
     }else if(this.getSumOfDecisions() === 0){
@@ -126,25 +124,30 @@ function dealerObj() {
   this.doPayOut = function() {
     for(var i = 0; i < playerRay.length; i++) {
       for(var j = 0; j < playerRay[i].hands.length; j++){
+        console.log(playerRay[i].hands[j].alive);
+        var chipChange = playerRay[i].hands[j].betSize + playerRay[i].hands[j].doubledBet;
         if(dealer.isBust() && playerRay[i].hands[j].alive) {
           if(!playerRay[i].hands[j].isBusted()) {
-            playerRay[i].chips += playerRay[i].hands[j].betSize;
+            playerRay[i].chips += chipChange + playerRay[i].hands[j].betSize;
             $(playerRay[i].chipsDiv).text('$' + playerRay[i].chips);
             playerRay[i].hands[j].alive = false;
           }
         }
+        console.log(playerRay[i].hands[j].alive);
         if(playerRay[i].hands[j].alive){
-          if(playerRay[i].hands[j].betSize < ) {
-            
-          }
+          console.log(playerRay[i].hands[j].betSize, playerRay[i].hands[j].doubledBet);
+          var chipChange = playerRay[i].hands[j].betSize + playerRay[i].hands[j].doubledBet;
           if(this.getValue() > playerRay[i].hands[j].getValue()){
-            playerRay[i].chips -= playerRay[i].hands[j].betSize;
+            playerRay[i].chips -= playerRay[i].hands[j].betSize;//chipChange;
             $(playerRay[i].chipsDiv).text('$' + playerRay[i].chips);
             playerRay[i].hands[j].alive = false;
           }else if(this.getValue() < playerRay[i].hands[j].getValue()) {
-            playerRay[i].chips += playerRay[i].hands[j].betSize;
+            playerRay[i].chips += chipChange + playerRay[i].hands[j].betSize;
             $(playerRay[i].chipsDiv).text('$' + playerRay[i].chips);
             playerRay[i].hands[j].alive = false;
+          }else {
+            chipChange = chipChange + playerRay[i].chips;
+            $(playerRay[i].chipsDiv).text('$' + chipChange);
           }
         }
         $(playerRay[i].chipsDiv).hide(10);

@@ -20,7 +20,6 @@ $.get(url, function(data) {
   var dealCardURL = 'https://deckofcardsapi.com/api/deck/' + deckID + '/draw/?count=' + 312;
   $.get(dealCardURL, function(datum) {
     deckRay = datum.cards;
-
     $('.add-player').click(function() {
       $('.start-button').hide().fadeIn(2000);
       if(playerRay.length < 7) {
@@ -94,9 +93,8 @@ $.get(url, function(data) {
           var nextCard = deckRay.pop();
           var i = player.activeHand;
           player.hands[i].cards.push(nextCard);
-          player.hands[i].alive = false;
           var doubledBet = player.betSize;
-          console.log('chips beforre: ', player.chips);
+          //console.log('chips beforre: ', player.chips);
           if(player.betSize > player.chips){
             doubledBet = player.chips;
             player.chips = 0;
@@ -104,7 +102,7 @@ $.get(url, function(data) {
             player.chips -= doubledBet;
           }
           player.hands[i].doubledBet = doubledBet;
-          console.log('chips after: ', player.chips);
+          //console.log('chips after: ', player.chips);
           doubledBet = doubledBet + player.betSize;
           $(player.chipsDiv).text('$' + player.chips);
           $(player.betDiv).text('$' + doubledBet);
@@ -156,6 +154,9 @@ $('.start-button').click(function() {
   $('.modal-start-page-bottom').hide(500);
   $('.modal-start-page-top').hide(500);
   $('.modal-deal-button').fadeIn(700);
+  $('.transform-wrapper').css('margin', '0 auto');
+  $('.transform-wrapper').css('transform', 'rotateX(45deg)');
+  $('.transform-wrapper').css('width', '70%');
 });
 
 $('.modal-deal-button').click(function() {
@@ -181,8 +182,8 @@ $('.modal-deal-button').click(function() {
   dealer.holeCard = dealer.cards[0];
   dealer.cards.push(deckRay.pop());
   dealer.checkForAce();
-  $('.dealer-container').append('<div class="holecard card"><img src="' + dealer.cards[0].image + '"></div>');
-  $('.dealer-container').append('<div class="card"><img src="' + dealer.cards[1].image + '"></div>');
+  $('.dealer-container').append('<div class="holecard dealer-card"><img src="' + dealer.cards[0].image + '"></div>');
+  $('.dealer-container').append('<div class="dealer-card"><img src="' + dealer.cards[1].image + '"></div>');
   dealer.getValuHi();
   dealer.getValuLo();
   dealer.doInsurance();
@@ -225,7 +226,6 @@ function getSumOfDecisions() {
   }
   return sum;
 }
-
 
 function dealerHasBlackJack() {
   if(dealer.cards.length === 2 && dealer.getValuHi() === 21){
