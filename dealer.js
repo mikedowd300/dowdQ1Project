@@ -87,9 +87,7 @@ function dealerObj() {
         playerRay[i].needsToDecideOnInsurance = 1;
       }
       $('.get-insurance, .skip-insurance').click(function() {
-        console.log(dealer.getSumOfDecisions());
         if(dealer.getSumOfDecisions() === 0){
-
           if(dealerHasBlackJack()) {
             console.log('DEALER HAS IT');
             dealer.handOver = true;

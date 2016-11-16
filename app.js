@@ -65,7 +65,6 @@ $.get(url, function(data) {
           $(player.betDiv).text('$' + player.betSize);
         });
         $(player.hitButton).click(function() {
-          console.log(player.activeHand);
           var nextCard = deckRay.pop();
           player.hands[0].cards.push(nextCard);
           var newImg = $('<img class="plyr-crd-img" src="' + nextCard.image + '">');

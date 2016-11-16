@@ -70,8 +70,8 @@ function playerObj(avatar, div) {
   this.playHand = function() {
     for(var i = 0; i < this.hands.length; i++) {
       this.activeHand = i;
-      if(this.hands[i].hasBlackJack()) {
-        this.hands[i].stay = true;
+      if(this.hands[i].hasBlackJack() || this.hands[i].getValuHi() === 21 || this.hands[i].getValuLo() === 21) {
+        this.hands[i].stay = true;// do i need this?
         this.hands[i].alive = false;
         if(!dealerHasBlackJack()){
           this.chips += (this.hands[i].betSize * 1.5);
@@ -84,7 +84,7 @@ function playerObj(avatar, div) {
         var card = deckRay.pop();
         this.hands[i].cards.push(card);
         var newImg = $('<img class="plyr-crd-img" src="' + card.image + '">');
-        playerRay[i].div.children('.card-container')[0].append(newImg[0]);
+        playerRay[i].div.children('.card-container')[i].append(newImg[0]);
         console.log('this was the split hand');
       }
       if(this.hands[i].isDoubleAble() && !this.hands[i].stay) {
@@ -96,7 +96,7 @@ function playerObj(avatar, div) {
       if(this.hands[i].isSplitAble()){
         $(this.splitButton).fadeIn(200);
       }
-      if(!this.hands[i].stay && this.hands[i].getValuHi() < 21 && this.hands[i].getValuLo() < 21){
+      if(!this.hands[i].stay && this.hands[i].getValuHi() != 21 && this.hands[i].getValuLo() < 21){
         $(this.hitButton).fadeIn(200);
       }
     }
@@ -126,5 +126,6 @@ function playerObj(avatar, div) {
     $(this.div).append('<div class="insult"><h2> Bitch, ' + insultRay.pop() + '</h2></div>')
     $('.insult').fadeIn(100).delay(7000).fadeOut(5000);
     $('.insult').css('transform', 'translate3d(0, -1600px, 0)');
+    $('.insult').css('background-color', 'transparent');
   };
 }
