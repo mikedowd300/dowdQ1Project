@@ -149,6 +149,10 @@ h1 {
   transition: height 1.3s
 }
 
+.player:hover {
+  width: 70%;
+} 
+
 .dealer-container {
   background-color: rgba(10, 230, 20, .8);
   height: 0;
@@ -193,10 +197,6 @@ h1 {
   transition: width 1.5s;
   perspective: 1200px;
   transition: background-color 1s, width: 2s;
-}
-
-.player:hover {
-  width: 70%;
 }
 
 .card {
