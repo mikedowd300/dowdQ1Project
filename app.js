@@ -25,12 +25,32 @@ $.get(url, function(data) {
       if(playerRay.length < 7) {
         var avIndex = Math.floor(Math.random() * avatarRay.length);
         var avatar =  avatarRay[avIndex].url;
+        var avGreet = avatarRay[avIndex].greeting;
         var newDiv = $($('<div class="player"></div>')[0]);
-        var player = new playerObj(avatar, newDiv);
+        var player = new playerObj(avatar, newDiv, avGreet);
         $('.player-container').append(newDiv);
-        var appendStr = '<div class="modal-insurance"><button class="get-insurance" type="button" name="button">Insurance?</button><button class="skip-insurance" type="button" name="button">No Thanks</button><h1 class="insurance-bet">0</h1></div>'
-        appendStr += '<div class="modal-play-options"><button class="hit-button" type="button" name="button">HIT</button><button class="double-button" type="button" name="button">DOUBLE</button><button class="stay-button" type="button" name="button">STAY</button><button class="split-button" type="button" name="button">SPLIT</button></div>'
-        appendStr += '<div class="avatar"><img class="av-img" src="' + player.avatar + '"></div><div class="money-container"><div class="chips">$' + player.chips + '</div><div class="bet">$' + player.betSize + '</div><button class="decrease-bet">' + '-' + '</button><button class="increase-bet">' + '+' + '</button></div>';
+        var appendStr =
+        '<div class="modal-insurance">'
+          + '<button class="get-insurance" type="button" name="button">Insurance?</button>'
+          + ' <button class="skip-insurance" type="button" name="button">No Thanks</button>'
+          + '<h1 class="insurance-bet">0</h1>' +
+        '</div>' +
+        '<div class="modal-play-options">'
+          + '<button class="hit-button" type="button" name="button">HIT</button>'
+          + '<button class="double-button" type="button" name="button">DOUBLE</button>'
+          + '<button class="stay-button" type="button" name="button">STAY</button>'
+          + '<button class="split-button" type="button" name="button">SPLIT</button>' +
+        '</div>' +
+        '<div class="avatar">'
+          +'<img class="av-img" src="' + player.avatar + '">'
+          +'<div class="greeting"><h3>' + player.greeting + '</h3></div>'+
+        '</div>' +
+        '<div class="money-container">'
+          + '<div class="chips">$' + player.chips + '</div>'
+          + '<div class="bet">$' + player.betSize + '</div>'
+          + '<button class="decrease-bet">' + '-' + '</button>'
+          + '<button class="increase-bet">' + '+' + '</button>' +
+        '</div>';
         newDiv.append(appendStr);
         var avImgWidth = $('.av-img').css('width');
         $('.av-img').css('height', avImgWidth);
@@ -93,7 +113,6 @@ $.get(url, function(data) {
           var i = player.activeHand;
           player.hands[i].cards.push(nextCard);
           var doubledBet = player.betSize;
-          //console.log('chips beforre: ', player.chips);
           if(player.betSize > player.chips){
             doubledBet = player.chips;
             player.chips = 0;
@@ -101,18 +120,16 @@ $.get(url, function(data) {
             player.chips -= doubledBet;
           }
           player.hands[i].doubledBet = doubledBet;
-          //console.log('chips after: ', player.chips);
           doubledBet = doubledBet + player.betSize;
           $(player.chipsDiv).text('$' + player.chips);
           $(player.betDiv).text('$' + doubledBet);
           var newImg = $('<img class="plyr-crd-img" src="' + nextCard.image + '">');
           player.div.children('.card-container')[0].append(newImg[0]);
-          //deal with player busting on the double
           if(player.hands[i].isBusted()) {
             player.insult();
             dealer.oponents -= 1;
             player.hands[i].alive = false;
-            player.chips -= player.hands[i].betSize;//fiddle with this
+            player.chips -= player.hands[i].betSize;
             if(player.chips < player.betSize) {
               player.betSize = player.chips;
               player.chips = 0;
@@ -150,12 +167,19 @@ $.get(url, function(data) {
 });
 
 $('.start-button').click(function() {
+  $('.greeting').fadeOut(300)
   $('.modal-start-page-bottom').hide(500);
   $('.modal-start-page-top').hide(500);
   $('.modal-deal-button').fadeIn(700);
   $('.transform-wrapper').css('margin', '0 auto');
   $('.transform-wrapper').css('transform', 'rotateX(45deg)');
   $('.transform-wrapper').css('width', '70%');
+  $('.dealer-container').css('height', '50vh');
+  $('.player-container').css('height', '50vh');
+  $('.money-container').fadeIn(2000);
+  $('.avatar, .av-img').css('border-radius', '50%').css('width', '100%');
+  $('.player').css('background-color', '#74f442').css('margin-top', '0');
+  $('.modal-play-options').fadeIn(1500);
 });
 
 $('.modal-deal-button').click(function() {
@@ -195,7 +219,6 @@ function checkIndexPlayHand(increment) {
   $(playerRay[playerIndex].splitButton).fadeOut(400);
 
   if(playerIndex + increment < playerRay.length) {
-
     playerIndex += increment;
     dealer.doPlayOutHands(playerIndex);
   } else {

@@ -2,82 +2,102 @@
   [
     {
       "url": "https://s-media-cache-ak0.pinimg.com/originals/05/e3/7c/05e37c25c172035baf110968604241d9.png",
-      "name": "Yoda"
+      "name": "Yoda",
+      "greeting": "In deep shit you are!"
     } ,
     {
       "url": "http://vignette2.wikia.nocookie.net/starwars/images/e/ec/ChewbaccaCSWE.jpg/revision/latest?cb=20130702064257",
-      "name": "Chewbacca"
+      "name": "Chewbacca",
+      "greeting": "Waaaahhhhhhh!"
     },
     {
       "url": "http://img.lum.dolimg.com/v1/images/C-3PO-See-Threepio_68fe125c.jpeg?region=0%2C1%2C1408%2C792&width=768",
-      "name": "C3P0"
+      "name": "C3P0",
+      "greeting": "I cant play without Master Luke!"
     },
     {
       "url": "https://s-media-cache-ak0.pinimg.com/236x/82/c4/c9/82c4c93bcc899b9272d7c3a51c2e8efa.jpg",
-      "name": "Ewok"
+      "name": "Ewok",
+      "greeting": "I wear a hat but no underwear, your in trouble!"
     },
     {
       "url": "http://images.techtimes.com/data/images/full/168082/princess-leia-organa.jpg?w=600",
-      "name": "Princess Leah"
+      "name": "Princess Leah",
+      "greeting": "Your kinda short for a Blackjack dealer, aren't you?!"
     },
     {
       "url": "http://img.cinemablend.com/cb/e/2/e/4/7/b/e2e47b5d5874d388179543ddcddcdd9c2a6a929bde29cec9f479bbf4bda36a97.jpg",
-      "name": "Han Solo"
+      "name": "Han Solo",
+      "greeting": "Blackjack, no problem, you're talkin to the guy that ran the Kessel run in 12 parsecs!"
     },
     {
       "url": "http://vignette4.wikia.nocookie.net/starwars/images/c/c6/Greedo.jpg/revision/latest?cb=20111104205225",
-      "name": "Guido"
+      "name": "Guido",
+      "greeting": "Im mean and green!"
     },
     {
       "url": "http://vignette2.wikia.nocookie.net/disneyvillains/images/9/93/Jabba_II.jpg/revision/latest?cb=20141125011339",
-      "name": "Jabba The Hutt"
+      "name": "Jabba The Hutt",
+      "greeting": "Your mind tricks won't work here!"
     },
     {
       "url": "http://img.lum.dolimg.com/v1/images/open-uri20150608-27674-v41y4v_9cb36d68.jpeg?region=0%2C0%2C800%2C341",
-      "name": "Lando Calrissian"
+      "name": "Lando Calrissian",
+      "greeting": "Something witty goes here!!"
     },
     {
       "url": "http://www.versusbattle.com/wp-content/uploads/2013/03/darth-vader.jpg",
-      "name": "Darth Vader"
+      "name": "Darth Vader",
+      "greeting": "Something ominous goes here!"
     },
     {
       "url": "http://images.huffingtonpost.com/2016-01-04-1451925790-3366395-obiwan.jpg",
-      "name": "Obi Wan Kenobi"
+      "name": "Obi Wan Kenobi",
+      "greeting": "May the bust be with you!"
     },
     {
       "url": "https://www.sideshowtoy.com/photo_902491_thumb.jpg",
-      "name": "Bobba Fett"
+      "name": "Bobba Fett",
+      "greeting": "I dont actually talk!"
     },
     {
       "url": "http://www.sideshowtoy.com/assets/products/7180-stormtrooper/lg/7180-stormtrooper-009.jpg",
-      "name": "Storm Trooper"
+      "name": "Storm Trooper",
+      "greeting": "Cheesy dialogue goes here!"
     },
     {
       "url": "http://cdn.abclocal.go.com/content/kgo/images/cms/1278134_630x354.jpg",
-      "name": "Admiral Ackbar"
+      "name": "Admiral Ackbar",
+      "greeting": "You're under attack!"
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/R2D2_(22213548240).jpg",
-      "name": "R2D2"
+      "name": "R2D2",
+      "greeting": "Beep beep boo!"
     },
     {
       "url": "http://vignette2.wikia.nocookie.net/starwars/images/8/82/Jawa_ionblaster.jpg/revision/latest?cb=20080122172309",
-      "name": "Jawa"
+      "name": "Jawa",
+      "greeting": "If this doesn't work out I'll steal your car!"
     },
     {
       "url": "http://vignette3.wikia.nocookie.net/starwars/images/5/5d/Tauntaun-TCGSfS.jpg/revision/latest?cb=20130811060635",
-      "name": "Ton Ton"
+      "name": "Ton Ton",
+      "greeting": "You took me off my ice planet for this?!"
     },
     {
       "url": "http://members.shaw.ca/david.p.z.888/star_wars/pics/tusken_raider.jpg",
-      "name": "Sand Person"
+      "name": "Sand Person",
+      "greeting": "I coould eat you, you know!"
     },
     {
       "url": "http://vignette4.wikia.nocookie.net/legostarwars/images/4/4d/Luke_Skywalker_2014.jpg/revision/latest?cb=20140729134120",
-      "name": "Lego Luke"
+      "name": "Lego Luke",
+      "greeting": "Let's hope I can play Black Jack better than I can act.!"
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/en/b/bf/Darth_Maul.png",
-      "name": "Darth Mall"
+      "name": "Darth Mall",
+      "greeting": "Do you really want a piece of me?"
     }
   ]

@@ -1,4 +1,4 @@
-function playerObj(avatar, div) {
+function playerObj(avatar, div, greeting) {
   this.avatar = avatar;
   this.chips = 98;
   this.betSize = 2;
@@ -7,6 +7,7 @@ function playerObj(avatar, div) {
   this.needsToDecideOnInsurance = 0; //Not set to false because they are added up
   this.div = div;
   this.activeHand = 0;
+  this.greeting = greeting;
   // this.chipsDiv = '';
   // this.betDiv = '';
   // this.showInsuranceBetH1 = '';
@@ -84,9 +85,10 @@ function playerObj(avatar, div) {
         var card = deckRay.pop();
         this.hands[i].cards.push(card);
         var newImg = $('<img class="plyr-crd-img" src="' + card.image + '">');
-        playerRay[i].div.children('.card-container')[i].append(newImg[0]);
-        console.log('this was the split hand');
+        console.log(this.hands.length, i);
+        this.div.children('.card-container')[i].append(newImg[0]);
       }
+      console.log(this.hands[i]);
       if(this.hands[i].isDoubleAble() && !this.hands[i].stay) {
          $(this.doubleButton).fadeIn(600);
       }
@@ -117,7 +119,6 @@ function playerObj(avatar, div) {
   };
   this.insult = function() {
     $('.insult').remove();
-    //$( ".hello" ).remove();
     $($(this.div.children('.insult'))[0]).remove()
     var url = 'https://galvanize-cors-proxy.herokuapp.com/quandyfactory.com/insult/json';
     $.get(url, function(dat) {
@@ -125,7 +126,7 @@ function playerObj(avatar, div) {
     });
     $(this.div).append('<div class="insult"><h2> Bitch, ' + insultRay.pop() + '</h2></div>')
     $('.insult').fadeIn(100).delay(7000).fadeOut(5000);
-    $('.insult').css('transform', 'translate3d(0, -1600px, 0)');
+    $('.insult').css('transform', 'translate3d(0px, -1600px, 0)');
     $('.insult').css('background-color', 'transparent');
   };
 }
