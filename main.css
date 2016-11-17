@@ -6,7 +6,7 @@ body {
   background-color: green;
   padding: 0;
   margin: 0;
-  font-family: 'Bungee', cursive;
+  font-family: 'Ramabhadra', sans-serif;
   color: white;
   z-index: 100;
   perspective: 1200px;
@@ -17,7 +17,7 @@ body {
 
 .transform-wrapper {
   margin: 0 auto;
-  margin-bottom: 40px;
+  padding-bottom: 100px;
   padding: 0;
   border: 1px solid black;
   background-color: transparent;
@@ -114,7 +114,7 @@ h1 {
 
 .modal-play-options {
   position: absolute;
-  top: 85%;
+  top: 90%;
   left: 0;
   display: none;
   width: 100%;
@@ -126,15 +126,13 @@ h1 {
 }
 
 .hit-button, .stay-button, .double-button, .split-button {
-  height: 80px;
   padding: 7px;
-  font: 73px;
   display: none;
   font-family: 'Bungee', cursive;
 }
 
 .hit-button:hover, .stay-button:hover, .double-button:hover, .split-button:hover{
-  height: 1.9rem;
+  height: 2.4rem;
   color: rgb(88,88,88);
 }
 
@@ -275,6 +273,7 @@ button {
   display: inline-block;
   width: 50%;
   margin-bottom: 7rem;
+  color: gold;
 }
 
 .bet {
