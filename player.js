@@ -69,7 +69,13 @@ function playerObj(avatar, div, greeting) {
     this.needsToDecideOnInsurance = 0;
   };
   this.playHand = function() {
+    var tempWidth = $(playerRay[0].div).css('width');
+    for(var i = 0; i < playerRay.length; i++) {
+      $(playerRay[i].div).css('width', tempWidth);
+      console.log(tempWidth);
+    }
     $(this.div).css('width', '70%')
+    console.log(this.div);
     for(var i = 0; i < this.hands.length; i++) {
       this.activeHand = i;
       if(this.hands[i].hasBlackJack() || this.hands[i].getValuHi() === 21 || this.hands[i].getValuLo() === 21) {
@@ -125,7 +131,7 @@ function playerObj(avatar, div, greeting) {
       insultRay.push(dat.insult);
     });
     $(this.holderDiv).append('<div class="insult"><h2> Bitch, ' + insultRay.pop() + '</h2></div>')
-    $('.insult').fadeIn(100).delay(7000).fadeOut(5000);
+    $('.insult').fadeIn(100).delay(7000).fadeOut(4500);
     $('.insult').css('transform', 'translate3d(0px, -1600px, 0)');
     $('.insult').css('background-color', 'transparent');
   };

@@ -7,6 +7,8 @@ var dealer;
 var cutCount = 60;
 var deckID;
 var insultRay = [];
+var holeCardFrontImg;
+var cardBackURL = 'https://s-media-cache-ak0.pinimg.com/originals/09/a5/8d/09a58d561b2a7b92bd506c83414ef1ab.png';
 $.get('avatarURLs.json', function(avDB) {
   avatarRay = avDB;
 });
@@ -58,7 +60,6 @@ $.get(url, function(data) {
         $('.av-img').css('height', avImgWidth);
         $('.money-container').css('margin-top', '-' + avImgWidth);
         player.holderDiv = $($(player.div.children('.holder')[0])[0]);
-        console.log(player.holderDiv);
         player.incrementButton = $(player.div.children('.money-container')[0]).children('.increase-bet')[0];
         player.decrementButton = $(player.div.children('.money-container')[0]).children('.decrease-bet')[0];
         player.chipsDiv = $($(player.div.children('.money-container')[0]).children('.chips')[0])[0];
@@ -175,6 +176,7 @@ $('.start-button').click(function() {
   $('.modal-start-page-bottom').hide(500);
   $('.modal-start-page-top').hide(500);
   $('.modal-deal-button').fadeIn(700);
+  $('.greeting').fadeOut(1000);
   $('.transform-wrapper').css('margin', '0 auto');
   $('.transform-wrapper').css('transform', 'rotateX(45deg)');
   $('.transform-wrapper').css('width', '70%');
@@ -184,10 +186,12 @@ $('.start-button').click(function() {
   $('.money-container').fadeIn(2000);
   $('.avatar, .av-img').css('border-radius', '50%').css('width', '90%');
   $('.player').css('background-color', '#74f442').css('margin-top', '0');
-  $('.modal-play-options').fadeIn(1500);
+  $('.modal-play-options').fadeOut(1500);
+  $('.bet').css('animation', 'blink .6s infinite');
 });
 
 $('.modal-deal-button').click(function() {
+  $('.bet').css('animation', 'blink .6s none');
   $('.card-container').remove();
   $('.dealer-container').html('');
   $('.modal-deal-button').hide(700);
@@ -210,8 +214,9 @@ $('.modal-deal-button').click(function() {
   dealer.holeCard = dealer.cards[0];
   dealer.cards.push(deckRay.pop());
   dealer.checkForAce();
-  $('.dealer-container').append('<div class="holecard dealer-card"><img src="' + dealer.cards[0].image + '"></div>');
-  $('.dealer-container').append('<div class="dealer-card"><img src="' + dealer.cards[1].image + '"></div>');
+  $('.dealer-container').append('<div class="holecard dealer-card"><img id="h-card" src="' + cardBackURL + '"></div>');
+  $('.dealer-container').append('<div class="dealer-card"><img id="d-card" src="' + dealer.cards[1].image + '"></div>');
+  holeCardFrontImg = dealer.cards[0].image;
   dealer.getValuHi();
   dealer.getValuLo();
   dealer.doInsurance();

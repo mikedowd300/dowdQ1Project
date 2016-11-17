@@ -59,9 +59,12 @@ function dealerObj() {
     }
     return this.getValuHi();
   };
-  this.hit = function() {
+  this.hit = function(delay) {
     var newCard = deckRay.pop();
-    $('.dealer-container').append('<div class="card"><img src="' + newCard.image + '"></div>');
+    var cardDiv = $($('<div class="card"><img src="' + newCard.image + '"></div>')[0]);
+    $('.dealer-container').append(cardDiv);
+    $(cardDiv).css('display', 'none');
+    $(cardDiv).delay(delay).fadeIn(800);
     this.cards.push(newCard);
     this.getValuLo();// dont hink i need these anymore
     this.getValuHi();// dont hink i need these anymore
@@ -110,8 +113,12 @@ function dealerObj() {
   };
   this.finishesHand = function() {
   if(this.oponents > 0 && !dealerHasBlackJack()){
+    var delay = 800;
+    //dealer flips hole cards
+    $("#h-card").attr('src', holeCardFrontImg)
     while(this.getValuHi() < 17) {
-      this.hit();
+      this.hit(delay);
+      delay += 800;
     };
     while(this.getValuHi() > 21 && this.getValuLo() < 17){
       this.hit();
@@ -122,7 +129,6 @@ function dealerObj() {
   this.doPayOut = function() {
     for(var i = 0; i < playerRay.length; i++) {
       for(var j = 0; j < playerRay[i].hands.length; j++){
-        console.log(playerRay[i].hands[j].alive);
         var chipChange = playerRay[i].hands[j].betSize + playerRay[i].hands[j].doubledBet;
         if(dealer.isBust() && playerRay[i].hands[j].alive) {
           if(!playerRay[i].hands[j].isBusted()) {
@@ -131,9 +137,7 @@ function dealerObj() {
             playerRay[i].hands[j].alive = false;
           }
         }
-        console.log(playerRay[i].hands[j].alive);
         if(playerRay[i].hands[j].alive){
-          console.log(playerRay[i].hands[j].betSize, playerRay[i].hands[j].doubledBet);
           var chipChange = playerRay[i].hands[j].betSize + playerRay[i].hands[j].doubledBet;
           if(this.getValue() > playerRay[i].hands[j].getValue()){
             playerRay[i].chips -= playerRay[i].hands[j].betSize;//chipChange;
@@ -157,6 +161,7 @@ function dealerObj() {
       playerRay[i].resetValues();
     }
     $('.modal-deal-button').fadeIn(1700);
+    $('.bet').css('animation', 'blink .6s infinite');
     $('.modal-play-options').hide(100);
     $('.increase-bet, .decrease-bet').fadeIn(1700);
     doShuffle();
