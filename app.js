@@ -35,26 +35,30 @@ $.get(url, function(data) {
           + ' <button class="skip-insurance" type="button" name="button">No Thanks</button>'
           + '<h1 class="insurance-bet">0</h1>' +
         '</div>' +
+        '<div class="holder">' +
+        '</div>' +
         '<div class="modal-play-options">'
           + '<button class="hit-button" type="button" name="button">HIT</button>'
           + '<button class="double-button" type="button" name="button">DOUBLE</button>'
           + '<button class="stay-button" type="button" name="button">STAY</button>'
           + '<button class="split-button" type="button" name="button">SPLIT</button>' +
         '</div>' +
-        '<div class="avatar">'
-          +'<img class="av-img" src="' + player.avatar + '">'
-          +'<div class="greeting"><h3>' + player.greeting + '</h3></div>'+
-        '</div>' +
         '<div class="money-container">'
           + '<div class="chips">$' + player.chips + '</div>'
           + '<div class="bet">$' + player.betSize + '</div>'
           + '<button class="decrease-bet">' + '-' + '</button>'
           + '<button class="increase-bet">' + '+' + '</button>' +
+        '</div>' +
+        '<div class="avatar">'
+          + '<img class="av-img" src="' + player.avatar + '">'
+          + '<div class="greeting"><h3>' + player.greeting + '</h3></div>'+
         '</div>';
         newDiv.append(appendStr);
         var avImgWidth = $('.av-img').css('width');
         $('.av-img').css('height', avImgWidth);
         $('.money-container').css('margin-top', '-' + avImgWidth);
+        player.holderDiv = $($(player.div.children('.holder')[0])[0]);
+        console.log(player.holderDiv);
         player.incrementButton = $(player.div.children('.money-container')[0]).children('.increase-bet')[0];
         player.decrementButton = $(player.div.children('.money-container')[0]).children('.decrease-bet')[0];
         player.chipsDiv = $($(player.div.children('.money-container')[0]).children('.chips')[0])[0];
@@ -88,7 +92,7 @@ $.get(url, function(data) {
           var nextCard = deckRay.pop();
           player.hands[0].cards.push(nextCard);
           var newImg = $('<img class="plyr-crd-img" src="' + nextCard.image + '">');
-          player.div.children('.card-container')[0].append(newImg[0]);
+          player.holderDiv.children('.card-container')[0].append(newImg[0]);
           if(player.hands[player.activeHand].isBusted()) {
             player.insult();
             dealer.oponents -= 1;
@@ -124,7 +128,7 @@ $.get(url, function(data) {
           $(player.chipsDiv).text('$' + player.chips);
           $(player.betDiv).text('$' + doubledBet);
           var newImg = $('<img class="plyr-crd-img" src="' + nextCard.image + '">');
-          player.div.children('.card-container')[0].append(newImg[0]);
+          player.holderDiv.children('.card-container')[0].append(newImg[0]);
           if(player.hands[i].isBusted()) {
             player.insult();
             dealer.oponents -= 1;
@@ -153,11 +157,11 @@ $.get(url, function(data) {
           }
           var card2 = deckRay.pop();
           var newImg = $('<img class="plyr-crd-img" src="' + card2.image + '">');
-          player.div.children('.card-container')[i].append(newImg[0]);
+          player.holderDiv.children('.card-container')[i].append(newImg[0]);
           var removeImage = $(newImg[0]).prev();
           $(removeImage[0]).remove();
           player.hands[i].cards.push(card2);
-          $(player.div).append('<div class="card-container"><img class="plyr-crd-img" src="' + card.image +'"></div>');
+          $(player.holderDiv).append('<div class="card-container"><img class="plyr-crd-img" src="' + card.image +'"></div>');
           checkIndexPlayHand(0);
         });
         playerRay.push(player);
@@ -167,7 +171,7 @@ $.get(url, function(data) {
 });
 
 $('.start-button').click(function() {
-  $('.greeting').fadeOut(300)
+  $('.greeting').fadeOut(300);
   $('.modal-start-page-bottom').hide(500);
   $('.modal-start-page-top').hide(500);
   $('.modal-deal-button').fadeIn(700);
@@ -176,8 +180,9 @@ $('.start-button').click(function() {
   $('.transform-wrapper').css('width', '70%');
   $('.dealer-container').css('height', '50vh');
   $('.player-container').css('height', '50vh');
+  $('.player').css('justify-content', 'flex-end');;
   $('.money-container').fadeIn(2000);
-  $('.avatar, .av-img').css('border-radius', '50%').css('width', '100%');
+  $('.avatar, .av-img').css('border-radius', '50%').css('width', '90%');
   $('.player').css('background-color', '#74f442').css('margin-top', '0');
   $('.modal-play-options').fadeIn(1500);
 });
@@ -193,12 +198,12 @@ $('.modal-deal-button').click(function() {
     var newHandObj = handObj();
     newHandObj.betSize = playerRay[i].betSize;
     playerRay[i].hands.push(newHandObj);
-    playerRay[i].div.append('<div class="card-container"></div>');
+    playerRay[i].holderDiv.append('<div class="card-container"></div>');
     for(var j = 0; j < 2; j++){
       var nextCard = deckRay.pop();
       playerRay[i].hands[0].cards.push(nextCard);
       var newImg = $('<img class="plyr-crd-img" src="' + nextCard.image + '">');
-      playerRay[i].div.children('.card-container')[0].append(newImg[0]);
+      playerRay[i].holderDiv.children('.card-container')[0].append(newImg[0]);
     }
   }
   dealer.cards.push(deckRay.pop());

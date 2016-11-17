@@ -69,6 +69,7 @@ function playerObj(avatar, div, greeting) {
     this.needsToDecideOnInsurance = 0;
   };
   this.playHand = function() {
+    $(this.div).css('width', '70%')
     for(var i = 0; i < this.hands.length; i++) {
       this.activeHand = i;
       if(this.hands[i].hasBlackJack() || this.hands[i].getValuHi() === 21 || this.hands[i].getValuLo() === 21) {
@@ -86,9 +87,8 @@ function playerObj(avatar, div, greeting) {
         this.hands[i].cards.push(card);
         var newImg = $('<img class="plyr-crd-img" src="' + card.image + '">');
         console.log(this.hands.length, i);
-        this.div.children('.card-container')[i].append(newImg[0]);
+        this.holderDiv.children('.card-container')[i].append(newImg[0]);
       }
-      console.log(this.hands[i]);
       if(this.hands[i].isDoubleAble() && !this.hands[i].stay) {
          $(this.doubleButton).fadeIn(600);
       }
@@ -124,7 +124,7 @@ function playerObj(avatar, div, greeting) {
     $.get(url, function(dat) {
       insultRay.push(dat.insult);
     });
-    $(this.div).append('<div class="insult"><h2> Bitch, ' + insultRay.pop() + '</h2></div>')
+    $(this.holderDiv).append('<div class="insult"><h2> Bitch, ' + insultRay.pop() + '</h2></div>')
     $('.insult').fadeIn(100).delay(7000).fadeOut(5000);
     $('.insult').css('transform', 'translate3d(0px, -1600px, 0)');
     $('.insult').css('background-color', 'transparent');
