@@ -187,7 +187,7 @@ $('.start-button').click(function() {
   $('.money-container').fadeIn(2000);
   $('.avatar, .av-img').css('border-radius', '50%').css('width', '90%');
   $('.player').css('background-color', '#74f442').css('margin-top', '0');
-  $('.avatar').css('margin-bottom', '10%');
+  $('.avatar').css('margin-bottom', '15%');
   $('.modal-play-options').fadeOut(1500);
   $('.bet').css('animation', 'blink .6s infinite');
 });
