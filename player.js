@@ -69,13 +69,7 @@ function playerObj(avatar, div, greeting) {
     this.needsToDecideOnInsurance = 0;
   };
   this.playHand = function() {
-    var tempWidth = $(playerRay[0].div).css('width');
-    for(var i = 0; i < playerRay.length; i++) {
-      $(playerRay[i].div).css('width', tempWidth);
-      console.log(tempWidth);
-    }
-    $(this.div).css('width', '70%')
-    console.log(this.div);
+    $(this.div).css('width', '75%')
     for(var i = 0; i < this.hands.length; i++) {
       this.activeHand = i;
       if(this.hands[i].hasBlackJack() || this.hands[i].getValuHi() === 21 || this.hands[i].getValuLo() === 21) {

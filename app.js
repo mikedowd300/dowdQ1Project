@@ -57,8 +57,9 @@ $.get(url, function(data) {
         '</div>';
         newDiv.append(appendStr);
         var avImgWidth = $('.av-img').css('width');
-        $('.av-img').css('height', avImgWidth);
         $('.money-container').css('margin-top', '-' + avImgWidth);
+        avImgWidth = (parseInt(avImgWidth) * .9) + 'px';
+        $('.av-img').css('height', avImgWidth);
         player.holderDiv = $($(player.div.children('.holder')[0])[0]);
         player.incrementButton = $(player.div.children('.money-container')[0]).children('.increase-bet')[0];
         player.decrementButton = $(player.div.children('.money-container')[0]).children('.decrease-bet')[0];
@@ -196,6 +197,11 @@ $('.modal-deal-button').click(function() {
   $('.dealer-container').html('');
   $('.modal-deal-button').hide(700);
   $('.increase-bet, .decrease-bet').hide(400);
+  var tempWidth = $(playerRay[0].div).css('width');
+  for(var i = 0; i < playerRay.length; i++) {
+    $(playerRay[i].div).css('width', tempWidth);
+    console.log(tempWidth);
+  }
   dealer = new dealerObj();
   dealer.oponents = playerRay.length;
   for(var i = 0; i < playerRay.length; i++) {
