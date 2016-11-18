@@ -62,7 +62,7 @@ body {
 
 .modal-deal-button {
   position: fixed;
-  top: 50%;
+  top: 40%;
   right: 25%;
   display: none;
   font-size: 2rem;
@@ -180,7 +180,7 @@ h1 {
   width: 40%;
   height: 100%;
   margin: 0 6px;
-  margin-top: 10%;
+  margin-top: 3%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

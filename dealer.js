@@ -1,6 +1,7 @@
 function dealerObj() {
   this.holeCard = '';
   this.cards = [];
+  this.delay = 800;
   //this.hasAce = false;
   //this.valuHi = 0;
   //this.valuLo = 0;
@@ -120,6 +121,7 @@ function dealerObj() {
       this.hit(delay);
       delay += 800;
     };
+    this.delay = delay + 800;
     while(this.getValuHi() > 21 && this.getValuLo() < 17){
       this.hit();
     }
@@ -160,7 +162,7 @@ function dealerObj() {
     for(var i = 0; i < playerRay.length; i++) {
       playerRay[i].resetValues();
     }
-    $('.modal-deal-button').fadeIn(1700);
+    $('.modal-deal-button').delay(this.delay).fadeIn(1700);
     $('.bet').css('animation', 'blink .6s infinite');
     $('.modal-play-options').hide(100);
     $('.increase-bet, .decrease-bet').fadeIn(1700);

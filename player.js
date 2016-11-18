@@ -62,6 +62,7 @@ function playerObj(avatar, div, greeting) {
     }
     this.chips -= this.insuranceBet;
     $(this.showInsuranceBetH1).text('$' + this.insuranceBet);
+    $(this.showInsuranceBetH1).css('color', 'black');
     $(this.chipsDiv).text('$' + this.chips);
   };
   this.skipInsurance = function() {
