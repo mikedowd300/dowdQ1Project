@@ -5,20 +5,7 @@ function handObj() {
     stay: false, //maybe get rid of this
     alive: true,
     betSize: 0,
-    doubledBet: 0,//sometimes player doubles for less
-    //hasAce: false,
-    //busts: false,
-    //displayButtons: false,
-    //doubleAble: false,
-    //splitAble: false,
-    //valuLo: 0,
-    //hasBlackJack: false,
-    //valuHi: 0,
-    // run: function() {
-    //   this.getValuHi();
-    //   this.getValuLo();
-    //   this.doHasBlackJack();
-    // },
+    doubledBet: 0,
     getValuHi: function() {
       var sum = 0;
       for(var i = 0; i < this.cards.length; i++){

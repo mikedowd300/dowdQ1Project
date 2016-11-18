@@ -8,21 +8,6 @@ function playerObj(avatar, div, greeting) {
   this.div = div;
   this.activeHand = 0;
   this.greeting = greeting;
-  // this.chipsDiv = '';
-  // this.betDiv = '';
-  // this.showInsuranceBetH1 = '';
-  // this.modalInsuranceDiv = '';
-  // this.getInsuranceButton = '';
-  // this.skipInsuranceButton = '';
-  // this.optionsDiv = '';
-  // this.hitButton  = '';
-  // this.stayButton = '';
-  // this.doubleButton = '';
-  // this.splitButton = '';
-  // this.incrementButton = '';
-  // this.decrementButton = '';
-  // this.doubleAble = true;
-  // this.splitAble = false;
   this.increaseBet = function() {
     if(this.betSize < 50 && this.chips >= 2) {
       this.betSize += 2;
@@ -70,6 +55,10 @@ function playerObj(avatar, div, greeting) {
     this.needsToDecideOnInsurance = 0;
   };
   this.playHand = function() {
+    var tempWidth = $(playerRay[0].div).css('width');
+    for(var i = 0; i < playerRay.length; i++) {
+      $(playerRay[i].div).css('width', tempWidth);
+    }
     $(this.div).css('width', '75%')
     for(var i = 0; i < this.hands.length; i++) {
       this.activeHand = i;
@@ -83,7 +72,6 @@ function playerObj(avatar, div, greeting) {
         checkIndexPlayHand(1);
       }
       if(this.hands[i].cards.length === 1) {
-        //THIS IS FOR AFTER A SPLIT
         var card = deckRay.pop();
         this.hands[i].cards.push(card);
         var newImg = $('<img class="plyr-crd-img" src="' + card.image + '">');

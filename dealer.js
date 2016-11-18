@@ -2,14 +2,6 @@ function dealerObj() {
   this.holeCard = '';
   this.cards = [];
   this.delay = 800;
-  //this.hasAce = false;
-  //this.valuHi = 0;
-  //this.valuLo = 0;
-  //this.value = 0;
-  //this.hasBlackJack = false;
-  //this.busts = false;
-  //this.mustFinish = false;
-  //this.hasAceShowing = false;
   this.handOver = false;
   this.oponents = 0;
   this.checkForAce = function() {
@@ -115,7 +107,6 @@ function dealerObj() {
   this.finishesHand = function() {
   if(this.oponents > 0 && !dealerHasBlackJack()){
     var delay = 800;
-    //dealer flips hole cards
     $("#h-card").attr('src', holeCardFrontImg)
     while(this.getValuHi() < 17) {
       this.hit(delay);
